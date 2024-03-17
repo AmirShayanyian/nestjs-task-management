@@ -25,4 +25,9 @@ export class TasksService {
   getById(id: string): Task {
     return this.tasks.find((task) => task.id == id);
   }
+
+  deleteTask(id: string): string {
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+    return `Task with this id => ${id} has been deleted.`;
+  }
 }
