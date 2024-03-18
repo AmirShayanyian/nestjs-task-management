@@ -30,4 +30,13 @@ export class TasksService {
     this.tasks = this.tasks.filter((task) => task.id !== id);
     return `The task with this id => ${id} has been deleted.`;
   }
+
+  updateTask(id: string, createTaskDto: CreateTaskDto): Task {
+    const { title, description } = createTaskDto;
+    let theTask = this.tasks.find((task) => task.id == id);
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+    theTask = { title, description, status: TaskStatus.Open, id: id };
+    this.tasks.push(theTask);
+    return theTask;
+  }
 }
