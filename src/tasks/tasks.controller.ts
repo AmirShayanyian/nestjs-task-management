@@ -6,20 +6,22 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { Task } from './task.entity';
 import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
+import { TasksFilterDto } from './dto/tasks-filter.dto';
 
 @Controller('tasks')
 export class TasksController {
   constructor(private tasksService: TasksService) {}
 
-  // @Get('/getAll')
-  // getAllTasks(): Task[] {
-  //   return this.tasksService.getAllTasks();
-  // }
+  @Get('/getTasks')
+  getTasks(@Query() filterDto: TasksFilterDto): Promise<Task[]> {
+    return this.tasksService.getTasks(filterDto);
+  }
 
   @Post('/createTask')
   createTask(@Body() dto: CreateTaskDto): Promise<Task> {
