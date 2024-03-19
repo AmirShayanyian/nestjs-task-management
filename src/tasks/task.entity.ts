@@ -13,5 +13,8 @@ export class Task {
   description: string;
 
   @Column()
+  attachments: string;
+
+  @Column()
   status: TaskStatus;
 }
